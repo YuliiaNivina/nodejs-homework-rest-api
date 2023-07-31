@@ -1,5 +1,4 @@
 const express = require("express");
-const Joi = require("joi");
 
 const router = express.Router();
 
@@ -12,6 +11,8 @@ router.get("/:id", ctrl.getContactById);
 router.post("/", ctrl.addContact);
 
 router.put("/:id", ctrl.updateContact);
+
+router.patch("/:id/favorite", ctrl.updateFavoriteContact);
 
 router.delete("/:id", ctrl.deleteContact);
 
