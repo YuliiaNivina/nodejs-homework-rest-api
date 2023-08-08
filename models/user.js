@@ -29,11 +29,13 @@ const userSchema = new Schema(
 userSchema.post("save", MongooseError);
 
 const joiUserSchema = Joi.object({
-    email: Joi.string().pattern(/.+@.+\..+/i).required(),
-    password: Joi.string().min(6).required(),
-    subscription: Joi.string(),
-})
+  email: Joi.string()
+    .pattern(/.+@.+\..+/i)
+    .required(),
+  password: Joi.string().min(6).required(),
+  subscription: Joi.string(),
+});
 
 const User = model("user", userSchema);
 
-module.exports = {User, joiUserSchema};
+module.exports = { User, joiUserSchema };

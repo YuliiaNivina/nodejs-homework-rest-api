@@ -3,7 +3,8 @@ const ResultError = require("../utils/ResultError");
 const ctrlWrapper = require("../utils/ctrlWrapper");
 
 const getListContacts = async (req, res) => {
-  const result = await Contact.find();
+  const { _id: owner } = req.user;
+  const result = await Contact.find({ owner });
   res.json(result);
 };
 
@@ -21,7 +22,9 @@ const addContact = async (req, res) => {
   if (error) {
     throw ResultError(400, "missing required name field");
   }
-  const result = await Contact.create(req.body);
+
+  const { _id: owner } = req.user;
+  const result = await Contact.create({ ...req.body, owner });
   res.status(201).json(result);
 };
 
